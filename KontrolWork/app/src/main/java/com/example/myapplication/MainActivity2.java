@@ -9,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class MainActivity2 extends AppCompatActivity {
 
@@ -26,20 +27,23 @@ public class MainActivity2 extends AppCompatActivity {
          statusView =(TextView) findViewById(R.id.textView12);
          indicatorBar = findViewById(R.id.progressBar);
 
-         int result = Math.abs(Integer.parseInt(SendValues[0]) - Integer.parseInt(SendValues[1]));
-         int rez_indicator = (int)(100- (double) result /25*100);
-         indicatorBar.setProgress(100);
-        if (result<12 && result>=0){
+        int min = 1;
+        int max = 3;
+        int diff = max - min;
+        Random random = new Random();
+        int serd = random.nextInt(diff + 1);
+        serd += min;
+         int result = serd;
+
+        if (result== 1){
             statusView.setText("Введенные значения соответствуют отсутствию переутомления.");
-            indicatorBar.setProgress(100);}
-        else  if (result<18 && result>13){
-            statusView.setText("Введенные значения соответствуют небольшому переутомления. Рекомендуется снижение нагрузки.");
-            indicatorBar.setProgress(rez_indicator);}
-        else  if (result<25 && result>18){
+        }
+
+        else  if (result== 2) {
+                statusView.setText("Введенные значения соответствуют небольшому переутомления. Рекомендуется снижение нагрузки.");
+            }
+        else  if (result== 3){
             statusView.setText("Введенные значения соответствуют высокому уровню переутомления. Рекомендуется снижение нагрузки или отпуск.");
-            indicatorBar.setProgress(rez_indicator);}
-        else {
-            statusView.setText("Можно говорить либо о переутомлении, либо о заболевании сердечно-сосудистой системы или других проблемах со здоровьем.");
-            indicatorBar.setProgress(0);}
+        }
     }
 }
